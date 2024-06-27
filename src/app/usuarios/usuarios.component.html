@@ -1,0 +1,44 @@
+<section>
+    <h2>Gestor de Usuarios</h2>
+</section>
+<section class="form-box cnt">
+    <form class="form" [formGroup]="formularioUsuario" (ngSubmit)="enviarFormulario()">
+        <span class="title">Agregar</span>
+        <span class="subtitle">Create a free account with your email.</span>
+        <div class="form-container">
+            <input formControlName="nombre" type="text" class="input" placeholder="Nombre" />@if(formularioUsuario.get('nombre')?.errors?.['required']) {
+            <span style="color: red">El nombre es requerido</span> }
+            <input formControlName="edad" type="number" class="input" placeholder="Edad" /> @if(formularioUsuario.get('edad')?.errors?.['required']) {
+            <span style="color: red">La edad es requerido</span> }
+            <input formControlName="dpi" type="text" class="input" placeholder="DPI" /> @if(formularioUsuario.get('dpi')?.errors?.['required']) {
+            <span style="color: red">El dpi es requerido</span> }
+        </div>
+        <button type="submit">Agregar</button>
+    </form>
+</section>
+<section class="table-box">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>DPI</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for( usuario of this.listaUsuarios; track usuario.id){
+
+            <tr>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.edad }}</td>
+                <td>{{ usuario.dpi }}</td>
+                <td>
+                    <button (click)="editarUsuario(usuario)">Editar</button>
+                    <button (click)="eliminarUsuario(usuario)">Eliminar</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
